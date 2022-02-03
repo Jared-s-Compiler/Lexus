@@ -31,7 +31,7 @@
 	#include <iostream>
 
 	#include "../include/interpreter.h"
-	/*#include "location.hh"*/
+	#include "location.hh"
 	#include "lexer.cpp"
 	#include "scanner.h"
 
@@ -128,14 +128,14 @@ doend { return Synthetic::Parser::make_DOEND(yytext, Synthetic::location()); }
 
 
 [-+]?[0-9]+ {
-		size_t number = strtoll(yytext, 0, 10);
-		return Synthetic::Parser::make_NUMBER(number, Synthetic::location());
+  size_t number = strtoll(yytext, 0, 10);
+  return Synthetic::Parser::make_NUMBER(number, Synthetic::location());
 }
 
 [-+]?[0-9]+[\.]?[0-9]+ {
-		std::string::size_type sz;
-		float number = std::stof(yytext, &sz); 
-		return Synthetic::Parser::make_FLOAT(number, Synthetic::location());
+  std::string::size_type sz;
+  float number = std::stof(yytext, &sz); 
+  return Synthetic::Parser::make_FLOAT(number, Synthetic::location());
 }
 
 . { std::cerr << "Scanner: unknown character [" << yytext << "]" << std::endl;  }
